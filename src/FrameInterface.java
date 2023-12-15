@@ -51,8 +51,8 @@ public class FrameInterface implements ActionListener{
         frame.add(txtLanci);
 
         // button start law with textfield
-        JButton btnStartLaw = new JButton("Submit");
-        btnStartLaw.setBounds(frameMargin + 150 + frameMargin, frameMargin * 4, buttonWidth - 20, 22);
+        JButton btnStartLaw = new JButton("Tira il dado");
+        btnStartLaw.setBounds(frameMargin + 150 + frameMargin, frameMargin * 4, buttonWidth, 22);
         btnStartLaw.addActionListener(this);    // Registering ActionListener to the button
         frame.add(btnStartLaw);
 
