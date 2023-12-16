@@ -27,23 +27,20 @@ public class LawTest
     }
 
     public String toString(int iterazioni){
-        String stato = "Risultato: *1*: ";
+        // creating string to print
+        String string = "Usciti:\n*1*: ";
         for(int i = 0; i < numbersDrew.length; i++){
-            stato += numbersDrew[i];
-            if(i < numbersDrew.length - 1) stato += " || " + " *" + (i + 1) + "* ";
+            string += numbersDrew[i];
+            if(i < numbersDrew.length - 1) string += "\n" + "*" + (i + 1) + "* ";
         }
-        
-        stato += "\n\nPERCENTUALI:\n";
-        
+        return string;
+    }
+
+    public double[] getPercentuali(){
         for(int i = 0; i < numbersDrew.length; i++){
-            stato += " " + (i + 1) + ": ";  // valore
-            stato += roundAvoid((double)numbersDrew[i] / (double)iterazioni * 100, 2);  // percentuale
-            stato += "% ";
-            // percentuali[i] = roundAvoid((double)numbersDrew[i] / (double)iterazioni * 100, 2);
-            if(i < numbersDrew.length - 1) stato += "\n";
+            percentuali[i] = roundAvoid((double)numbersDrew[i] / (double)iterazioni * 100, 2);  // calcolo percentuale
         }
-        
-        return stato;
+        return percentuali;
     }
 
     public static int getIterazioni() {

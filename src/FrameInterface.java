@@ -102,7 +102,7 @@ public class FrameInterface implements ActionListener{
         System.out.println("--- BTN PRESSED ---");
         String textFieldValue = txtLanci.getText();
 
-        textPrintArea.setBounds(frameMargin, 220, 500, 200);
+        textPrintArea.setBounds(frameMargin, 220, 150, 160);
         textPrintArea.setEditable(false);
         frame.setSize(frameBiggerWidth, frameBiggerHeight);
         btnShowCredits.setBounds(frameBiggerWidth - frameMargin - 90, frameBiggerHeight - frameMargin - 50, 90, 30);
@@ -129,7 +129,7 @@ public class FrameInterface implements ActionListener{
             String errorMessage = "\"Crediti\"\n" + "Progetto di Andrea Chiurla con l'aiuto del prof. Luigi Ferrari";
             JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Credits", JOptionPane.INFORMATION_MESSAGE);
 
-        } else{      // button "submit", using text field value
+        } else{      // button "submit", using custom value
             if (!onlyNumbers(textFieldValue, textFieldValue.length()) || textFieldValue.isEmpty()) {    // invalid value
                 System.out.println("--- INVALID VALUE ---");
                 frame.remove(textPrintArea);
