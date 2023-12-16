@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 /**
  * Classe che verifica la legge dei grandi numeri
@@ -9,7 +10,7 @@ public class LawTest
 {
     private int[] numbersDrew = {0, 0, 0, 0, 0, 0};
     private double[] percentuali = {0, 0, 0, 0, 0, 0,};
-    private final static int iterazioni = 100000;
+    private static int iterazioni = 100000;
 
     /**
      * Costruttore
@@ -26,7 +27,8 @@ public class LawTest
         numbersDrew[getRandomNumber(0, 6)]++;
     }
 
-    public String toString(int iterazioni){
+    public String toString(int inIterazioni){
+        this.iterazioni = inIterazioni;
         // creating string to print
         String string = "Usciti:\n*1*: ";
         for(int i = 0; i < numbersDrew.length; i++){
@@ -38,9 +40,14 @@ public class LawTest
 
     public double[] getPercentuali(){
         for(int i = 0; i < numbersDrew.length; i++){
-            percentuali[i] = roundAvoid((double)numbersDrew[i] / (double)iterazioni * 100, 2);  // calcolo percentuale
+            percentuali[i] = roundAvoid((double)numbersDrew[i] / (double)getIterazioni() * 100, 2);  // calcolo percentuale
+            System.out.println("function in lawtest: " + percentuali[i]);     // DEBUG
         }
         return percentuali;
+    }
+
+    public void reset(){
+        Arrays.fill(numbersDrew, 0);
     }
 
     public static int getIterazioni() {

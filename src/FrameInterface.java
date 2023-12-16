@@ -12,7 +12,7 @@ public class FrameInterface implements ActionListener{
     final int buttonWidth = 100;
     final int buttonHeight = 50;
     private int nLanci;
-
+    LawTest lawTest = new LawTest();
     JFrame frame = new JFrame(); // creating instance of JFrame
     JTextField txtLanci = new JTextField();
     TextArea textPrintArea = new TextArea();
@@ -20,6 +20,7 @@ public class FrameInterface implements ActionListener{
     JButton btn100klanci = new JButton("100k lanci");
     JButton btn100lanci = new JButton("100 lanci");
     JButton btnShowCredits = new JButton("Credits");
+    Label[] lblsPercentage = {new Label(), new Label(), new Label(), new Label(), new Label(), new Label()};
 
     public FrameInterface(){
         prepareStartingGUI();
@@ -88,13 +89,41 @@ public class FrameInterface implements ActionListener{
     }
 
     public String startTesting(int nLanci){
-        LawTest lawTest = new LawTest();
+        lawTest.reset();
         for(int i = 0; i < nLanci; i++){
             lawTest.lancia();
         }
         return lawTest.toString(nLanci);
     }
 
+    public void printPercentageLabels(double[] percentage){
+        for (int i = 0; i < lblsPercentage.length; i++){
+            frame.remove(lblsPercentage[i]);
+        }
+
+        int y = 230;
+
+        for (int i = 0; i < percentage.length; i++){
+            lblsPercentage[i].setBackground(new Color(255, 0, 0));
+            double width = mapMinMax(percentage[i], 0, 100, 10, 1000);
+            lblsPercentage[i].setBounds(frameMargin + 150 + frameMargin, y, (int)width, 20);
+            frame.add(lblsPercentage[i]);
+            y += 30;
+        }
+    }
+
+    /**
+     * Re-maps a number from one range to another
+     * @param value value to map
+     * @param oldMin
+     * @param oldMax
+     * @param newMin
+     * @param newMax
+     * @return value mapped
+     */
+    public double mapMinMax(double value, double oldMin, double oldMax, double newMin, double newMax) {
+        return  (newMax-newMin)*(value-oldMin)/(oldMax-oldMin)+newMin;
+    }
 
     // when one button is pressed:
     @Override
@@ -112,16 +141,19 @@ public class FrameInterface implements ActionListener{
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
+            printPercentageLabels(lawTest.getPercentuali());
         } else if (e.getSource() == btn10klanci){
             nLanci = 10000;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
+            printPercentageLabels(lawTest.getPercentuali());
         } else if (e.getSource() == btn100klanci){
             nLanci = 100000;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
+            printPercentageLabels(lawTest.getPercentuali());
         }else if (e.getSource() == btnShowCredits){
             // popup con credits
             frame.remove(textPrintArea);
@@ -144,6 +176,7 @@ public class FrameInterface implements ActionListener{
                 String toPrint = startTesting(nLanci);
                 textPrintArea.setText(toPrint);
                 frame.add(textPrintArea);
+                printPercentageLabels(lawTest.getPercentuali());
             }
         }
     }
