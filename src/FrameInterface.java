@@ -43,7 +43,7 @@ public class FrameInterface implements ActionListener{
 
         // lanci label
         Label lblTip = new Label("Inserisci quante volte devo lanciare il dado");
-        lblTip.setBounds(frameMargin, frameMargin * 3, 250, 20);
+        lblTip.setBounds(frameMargin, frameMargin * 3, 280, 20);
         frame.add(lblTip);
 
         // text field
