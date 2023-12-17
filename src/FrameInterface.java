@@ -28,6 +28,7 @@ public class FrameInterface implements ActionListener{
         frame.setTitle("Legge dei grandi numeri");
         frame.getContentPane().setLayout(null);
         frame.setSize(frameWidth, frameHeight);
+        frame.setLocationRelativeTo(null);      // open frame in center of the screen
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // stop esecution when frame is closed
         frame.setVisible(false);    // nascondi finestra
     }
