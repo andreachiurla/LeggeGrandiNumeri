@@ -4,10 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FrameInterface implements ActionListener{
-    final int frameWidth = 420;
-    final int frameBiggerWidth = 600;
-    final int frameHeight = 330;
-    final int frameBiggerHeight = 500;
+    final int frameWidth = 600;
+    final int frameHeight = 500;
     final int frameMargin = 20;
     final int buttonWidth = 100;
     final int buttonHeight = 50;
@@ -96,10 +94,14 @@ public class FrameInterface implements ActionListener{
         return lawTest.toString(nLanci);
     }
 
-    public void printPercentageLabels(double[] percentage){
+    private void removePercetageLabels(){
         for (int i = 0; i < lblsPercentage.length; i++){
             frame.remove(lblsPercentage[i]);
         }
+    }
+
+    public void printPercentageLabels(double[] percentage){
+        removePercetageLabels();
 
         int y = 230;
 
@@ -133,8 +135,7 @@ public class FrameInterface implements ActionListener{
 
         textPrintArea.setBounds(frameMargin, 220, 150, 160);
         textPrintArea.setEditable(false);
-        frame.setSize(frameBiggerWidth, frameBiggerHeight);
-        btnShowCredits.setBounds(frameBiggerWidth - frameMargin - 90, frameBiggerHeight - frameMargin - 50, 90, 30);
+        btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
 
         if (e.getSource() == btn100lanci){
             nLanci = 100;
@@ -155,9 +156,9 @@ public class FrameInterface implements ActionListener{
             frame.add(textPrintArea);
             printPercentageLabels(lawTest.getPercentuali());
         }else if (e.getSource() == btnShowCredits){
-            // popup con credits
             frame.remove(textPrintArea);
-            frame.setSize(frameWidth, frameHeight);
+            removePercetageLabels();
+            // popup with credits
             String errorMessage = "\"Crediti\"\n" + "Progetto di Andrea Chiurla con l'aiuto del prof. Luigi Ferrari";
             JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Credits", JOptionPane.INFORMATION_MESSAGE);
 
@@ -165,7 +166,7 @@ public class FrameInterface implements ActionListener{
             if (!onlyNumbers(textFieldValue, textFieldValue.length()) || textFieldValue.isEmpty()) {    // invalid value
                 System.out.println("--- INVALID VALUE ---");
                 frame.remove(textPrintArea);
-                frame.setSize(frameWidth, frameHeight);
+                removePercetageLabels();
                 btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
                 // popup con errore
                 String errorMessage = "\"Errore\"\n" + "Valore non valido";
