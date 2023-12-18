@@ -24,6 +24,9 @@ public class FrameInterface implements ActionListener{
         prepareStartingGUI();
     }
 
+    /**
+     * Sets the frame properties
+     */
     private void prepareStartingGUI(){
         frame.setTitle("Legge dei grandi numeri");
         frame.getContentPane().setLayout(null);
@@ -33,6 +36,9 @@ public class FrameInterface implements ActionListener{
         frame.setVisible(false);    // nascondi finestra
     }
 
+    /**
+     * Sets the frame objects and makes the frame visible
+     */
     public void setHomePage(){
         // title
         Label lblTitle = new Label("Legge dei grandi numeri");
@@ -87,25 +93,36 @@ public class FrameInterface implements ActionListener{
         frame.setVisible(true);
     }
 
-    public String startTesting(int nLanci){
+    /**
+     * Calls the method of the lawTest class that throws a dice once n times
+     * @param nThrows
+     * @return string to print in the frame with the n times that each number did
+     */
+    public String startTesting(int nThrows){
         lawTest.reset();
-        for(int i = 0; i < nLanci; i++){
+        for(int i = 0; i < nThrows; i++){
             lawTest.lancia();
         }
-        return lawTest.toString(nLanci);
+        return lawTest.toString(nThrows);
     }
 
-    private void removePercetageLabels(){
-        for (int i = 0; i < lblsPercentage.length; i++){
-            frame.remove(lblsPercentage[i]);
+    /**
+     * Removes 6 labels (graphic)
+     */
+    private void removePercentageLabels(){
+        for (Label label : lblsPercentage) {
+            frame.remove(label);
         }
     }
 
+    /**
+     * Prints 6 labels for the graphic
+     * @param percentage
+     */
     public void printPercentageLabels(double[] percentage){
-        removePercetageLabels();
+        removePercentageLabels();
 
         int y = 230;
-
         for (int i = 0; i < percentage.length; i++){
             lblsPercentage[i].setBackground(new Color(255, 0, 0));
             double width = mapMinMax(percentage[i], 0, 100, 10, 1000);
@@ -158,7 +175,7 @@ public class FrameInterface implements ActionListener{
             printPercentageLabels(lawTest.getPercentuali());
         }else if (e.getSource() == btnShowCredits){
             frame.remove(textPrintArea);
-            removePercetageLabels();
+            removePercentageLabels();
             // popup with credits
             String errorMessage = "\"Crediti\"\n" + "Progetto di Andrea Chiurla con l'aiuto del prof. Luigi Ferrari";
             JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Credits", JOptionPane.INFORMATION_MESSAGE);
@@ -167,7 +184,7 @@ public class FrameInterface implements ActionListener{
             if (!onlyNumbers(textFieldValue) || textFieldValue.isEmpty()) {    // invalid value
                 System.out.println("--- INVALID VALUE ---");
                 frame.remove(textPrintArea);
-                removePercetageLabels();
+                removePercentageLabels();
                 btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
                 // popup con errore
                 String errorMessage = "\"Errore\"\n" + "Valore non valido";
@@ -183,7 +200,13 @@ public class FrameInterface implements ActionListener{
         }
     }
 
+    /**
+     * Checks if there are only numbers in a string, uses trim()
+     * @param str
+     * @return True if only digits
+     */
     private boolean onlyNumbers(String str) {
+        // ignores leading and trailing spaces
         str = str.trim();
         int n = str.length();
 
