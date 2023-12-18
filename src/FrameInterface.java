@@ -164,7 +164,7 @@ public class FrameInterface implements ActionListener{
             JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Credits", JOptionPane.INFORMATION_MESSAGE);
 
         } else{      // button "submit", using custom value
-            if (!onlyNumbers(textFieldValue, textFieldValue.length()) || textFieldValue.isEmpty()) {    // invalid value
+            if (!onlyNumbers(textFieldValue) || textFieldValue.isEmpty()) {    // invalid value
                 System.out.println("--- INVALID VALUE ---");
                 frame.remove(textPrintArea);
                 removePercetageLabels();
@@ -174,7 +174,7 @@ public class FrameInterface implements ActionListener{
                     JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Dialog", JOptionPane.ERROR_MESSAGE);
             }else{      // valid value
                 System.out.println("--- VALID VALUE ---");
-                nLanci = Integer.parseInt(textFieldValue);
+                nLanci = Integer.parseInt(textFieldValue.trim());
                 String toPrint = startTesting(nLanci);
                 textPrintArea.setText(toPrint);
                 frame.add(textPrintArea);
@@ -183,11 +183,13 @@ public class FrameInterface implements ActionListener{
         }
     }
 
-    private boolean onlyNumbers(String str, int n) {
+    private boolean onlyNumbers(String str) {
+        str = str.trim();
+        int n = str.length();
 
         // Return false if the string
         // has empty or null
-        if (str == null || str == "") {
+        if (str == null || str.isEmpty()) {
             return false;
         }
 
