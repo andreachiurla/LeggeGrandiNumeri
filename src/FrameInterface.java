@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FrameInterface implements ActionListener{
-    final int frameWidth = 600;
+    final int frameWidth = 620;
     final int frameHeight = 500;
     final int frameMargin = 20;
     final int buttonWidth = 100;
@@ -14,9 +14,11 @@ public class FrameInterface implements ActionListener{
     JFrame frame = new JFrame(); // creating instance of JFrame
     JTextField txtLanci = new JTextField();
     TextArea textPrintArea = new TextArea();
+    JButton btn100lanci = new JButton("100 lanci");
+    JButton btn1klanci = new JButton("1k lanci");
     JButton btn10klanci = new JButton("10k lanci");
     JButton btn100klanci = new JButton("100k lanci");
-    JButton btn100lanci = new JButton("100 lanci");
+    JButton btn1000klanci = new JButton("1000k lanci");
     JButton btnShowCredits = new JButton("Credits");
     Label[] lblsPercentage = {new Label(), new Label(), new Label(), new Label(), new Label(), new Label()};
 
@@ -73,15 +75,25 @@ public class FrameInterface implements ActionListener{
         btn100lanci.addActionListener(this);    // Registering ActionListener to the button
         frame.add(btn100lanci);
 
+        // button 1k lanci
+        btn1klanci.setBounds(frameMargin * 2 + buttonWidth, heightPresetsBtn, buttonWidth, buttonHeight);
+        btn1klanci.addActionListener(this);    // Registering ActionListener to the button
+        frame.add(btn1klanci);
+
         // button 10k lanci
-        btn10klanci.setBounds(frameMargin + buttonWidth + frameMargin, heightPresetsBtn, buttonWidth, buttonHeight);
+        btn10klanci.setBounds(frameMargin * 3 + buttonWidth * 2, heightPresetsBtn, buttonWidth, buttonHeight);
         btn10klanci.addActionListener(this);    // Registering ActionListener to the button
         frame.add(btn10klanci);
 
         // button 100k lanci
-        btn100klanci.setBounds(frameMargin + buttonWidth + buttonWidth + frameMargin * 2, heightPresetsBtn, buttonWidth, buttonHeight);
+        btn100klanci.setBounds(frameMargin * 4 + buttonWidth * 3, heightPresetsBtn, buttonWidth, buttonHeight);
         btn100klanci.addActionListener(this);    // Registering ActionListener to the button
         frame.add(btn100klanci);
+
+        // button 1000k lanci
+        btn1000klanci.setBounds(frameMargin * 5 + buttonWidth * 4, heightPresetsBtn, buttonWidth, buttonHeight);
+        btn1000klanci.addActionListener(this);    // Registering ActionListener to the button
+        frame.add(btn1000klanci);
 
         // button credits
         btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
@@ -155,9 +167,14 @@ public class FrameInterface implements ActionListener{
         textPrintArea.setEditable(false);
         btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
 
-        // BTN 100 THROWS
-        if (e.getSource() == btn100lanci){
+        if (e.getSource() == btn100lanci) {  // BTN 100 THROWS
             nLanci = 100;
+            String toPrint = startTesting(nLanci);
+            textPrintArea.setText(toPrint);
+            frame.add(textPrintArea);
+            printPercentageLabels(lawTest.getPercentuali());
+        }else if (e.getSource() == btn1klanci){
+            nLanci = 1000;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
@@ -170,6 +187,12 @@ public class FrameInterface implements ActionListener{
             printPercentageLabels(lawTest.getPercentuali());
         } else if (e.getSource() == btn100klanci){  // BTN 100K THROWS
             nLanci = 100000;
+            String toPrint = startTesting(nLanci);
+            textPrintArea.setText(toPrint);
+            frame.add(textPrintArea);
+            printPercentageLabels(lawTest.getPercentuali());
+        } else if (e.getSource() == btn1000klanci){  // BTN 1000K THROWS
+            nLanci = 1000000;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
