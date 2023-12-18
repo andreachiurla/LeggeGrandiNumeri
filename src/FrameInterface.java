@@ -247,7 +247,7 @@ public class FrameInterface implements ActionListener{
             // character is not a letter then
             // return false,
             // else return true
-            if (Character.isLetter(str.charAt(i))) {
+            if (!Character.isDigit(str.charAt(i))) {
                 return false;
             }
         }
