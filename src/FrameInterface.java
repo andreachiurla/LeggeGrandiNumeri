@@ -60,6 +60,7 @@ public class FrameInterface implements ActionListener{
         // button start law with textfield
         JButton btnStartLaw = new JButton("Tira il dado");
         btnStartLaw.setBounds(frameMargin + 150 + frameMargin, frameMargin * 4, buttonWidth, 22);
+        btnStartLaw.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnStartLaw.addActionListener(this);    // Registering ActionListener to the button
         frame.add(btnStartLaw);
 
@@ -72,32 +73,38 @@ public class FrameInterface implements ActionListener{
         // button 100 lanci
         btn100lanci.setBounds(frameMargin, heightPresetsBtn, buttonWidth, buttonHeight);
         btn100lanci.addActionListener(this);    // Registering ActionListener to the button
+        btn100lanci.setCursor(new Cursor(Cursor.HAND_CURSOR));
         frame.add(btn100lanci);
 
         // button 1k lanci
         btn1klanci.setBounds(frameMargin * 2 + buttonWidth, heightPresetsBtn, buttonWidth, buttonHeight);
         btn1klanci.addActionListener(this);    // Registering ActionListener to the button
+        btn1klanci.setCursor(new Cursor(Cursor.HAND_CURSOR));
         frame.add(btn1klanci);
 
         // button 10k lanci
         btn10klanci.setBounds(frameMargin * 3 + buttonWidth * 2, heightPresetsBtn, buttonWidth, buttonHeight);
         btn10klanci.addActionListener(this);    // Registering ActionListener to the button
+        btn10klanci.setCursor(new Cursor(Cursor.HAND_CURSOR));
         frame.add(btn10klanci);
 
         // button 100k lanci
         btn100klanci.setBounds(frameMargin * 4 + buttonWidth * 3, heightPresetsBtn, buttonWidth, buttonHeight);
         btn100klanci.addActionListener(this);    // Registering ActionListener to the button
+        btn100klanci.setCursor(new Cursor(Cursor.HAND_CURSOR));
         frame.add(btn100klanci);
 
         // button 1000k lanci
         btn1000klanci.setBounds(frameMargin * 5 + buttonWidth * 4, heightPresetsBtn, buttonWidth, buttonHeight);
         btn1000klanci.addActionListener(this);    // Registering ActionListener to the button
+        btn1000klanci.setCursor(new Cursor(Cursor.HAND_CURSOR));
         frame.add(btn1000klanci);
 
         // button credits
         btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
         btnShowCredits.addActionListener(this);
         btnShowCredits.setBackground(Color.gray);
+        btnShowCredits.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnShowCredits.setOpaque(true);
         frame.add(btnShowCredits);
 
