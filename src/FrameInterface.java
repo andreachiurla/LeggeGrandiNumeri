@@ -9,7 +9,6 @@ public class FrameInterface implements ActionListener{
     final int frameMargin = 20;
     final int buttonWidth = 100;
     final int buttonHeight = 50;
-    private int nLanci;
     LawTest lawTest = new LawTest();
     JFrame frame = new JFrame(); // creating instance of JFrame
     JTextField txtLanci = new JTextField();
@@ -167,6 +166,7 @@ public class FrameInterface implements ActionListener{
         textPrintArea.setEditable(false);
         btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
 
+        int nLanci;
         if (e.getSource() == btn100lanci) {  // BTN 100 THROWS
             nLanci = 100;
             String toPrint = startTesting(nLanci);
