@@ -155,32 +155,33 @@ public class FrameInterface implements ActionListener{
         textPrintArea.setEditable(false);
         btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
 
+        // BTN 100 THROWS
         if (e.getSource() == btn100lanci){
             nLanci = 100;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
             printPercentageLabels(lawTest.getPercentuali());
-        } else if (e.getSource() == btn10klanci){
+        } else if (e.getSource() == btn10klanci){   // BTN 10K THROWS
             nLanci = 10000;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
             printPercentageLabels(lawTest.getPercentuali());
-        } else if (e.getSource() == btn100klanci){
+        } else if (e.getSource() == btn100klanci){  // BTN 100K THROWS
             nLanci = 100000;
             String toPrint = startTesting(nLanci);
             textPrintArea.setText(toPrint);
             frame.add(textPrintArea);
             printPercentageLabels(lawTest.getPercentuali());
-        }else if (e.getSource() == btnShowCredits){
+        }else if (e.getSource() == btnShowCredits){ // BTN SHOW CREDITS
             frame.remove(textPrintArea);
             removePercentageLabels();
             // popup with credits
             String errorMessage = "\"Crediti\"\n" + "Progetto di Andrea Chiurla con l'aiuto del prof. Luigi Ferrari";
             JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Credits", JOptionPane.INFORMATION_MESSAGE);
 
-        } else{      // button "submit", using custom value
+        } else{      // BTN "submit" (custom value)
             if (!onlyNumbers(textFieldValue) || textFieldValue.isEmpty()) {    // invalid value
                 System.out.println("--- INVALID VALUE ---");
                 frame.remove(textPrintArea);
