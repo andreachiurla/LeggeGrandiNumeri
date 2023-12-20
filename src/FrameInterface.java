@@ -21,6 +21,8 @@ public class FrameInterface implements ActionListener{
     JButton btnShowCredits = new JButton("Credits");
     Label[] lblsPercentage = {new Label(), new Label(), new Label(), new Label(), new Label(), new Label()};
     JCheckBox cbxAnimation = new JCheckBox("Rallenta costruzione grafico", false);
+    int heightPresetsBtn = frameMargin * 8 - 20 ;       // height of the preset buttons
+    Label[] lblsTime = {new Label(), new Label(), new Label(), new Label(), new Label(), new Label()};
 
     public FrameInterface(){
         prepareStartingGUI();
@@ -71,10 +73,9 @@ public class FrameInterface implements ActionListener{
         cbxAnimation.addActionListener(this);
         frame.add(cbxAnimation);
 
-        int heightPresetsBtn = frameMargin * 8;
         // presets label
         JLabel lblPresets = new JLabel("Oppure utilizza uno dei preset");
-        lblPresets.setBounds(frameMargin, heightPresetsBtn - 30, 200, 20);
+        lblPresets.setBounds(frameMargin, heightPresetsBtn - 20, 200, 20);
         frame.add(lblPresets);
 
         // button 100 lanci
@@ -179,7 +180,6 @@ public class FrameInterface implements ActionListener{
     // when one button is pressed:
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("--- BTN PRESSED ---");
         String textFieldValue = txtLanci.getText();
 
         textPrintArea.setBounds(frameMargin, 220, 150, 160);
@@ -187,7 +187,7 @@ public class FrameInterface implements ActionListener{
         btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
 
         int nLanci;
-        if (e.getSource() == btn100lanci) {  // BTN 100 THROWS
+        if (e.getSource() == btn100lanci) {             // BTN 100 THROWS
             nLanci = 100;
             if(cbxAnimation.isSelected()){
                 buildResults(nLanci, 12);
@@ -197,7 +197,7 @@ public class FrameInterface implements ActionListener{
                 frame.add(textPrintArea);
                 printPercentageLabels(lawTest.getPercentuali());
             }
-        }else if (e.getSource() == btn1klanci){ // BTN 1K THROWS
+        }else if (e.getSource() == btn1klanci){         // BTN 1K THROWS
             nLanci = 1000;
             if(cbxAnimation.isSelected()){
                 buildResults(nLanci, 1);
@@ -207,7 +207,7 @@ public class FrameInterface implements ActionListener{
                 frame.add(textPrintArea);
                 printPercentageLabels(lawTest.getPercentuali());
             }
-        } else if (e.getSource() == btn10klanci){   // BTN 10K THROWS
+        } else if (e.getSource() == btn10klanci){        // BTN 10K THROWS
             nLanci = 10000;
             if(cbxAnimation.isSelected()){
                 buildResults(nLanci, 1);
@@ -217,7 +217,7 @@ public class FrameInterface implements ActionListener{
                 frame.add(textPrintArea);
                 printPercentageLabels(lawTest.getPercentuali());
             }
-        } else if (e.getSource() == btn100klanci){  // BTN 100K THROWS
+        } else if (e.getSource() == btn100klanci){      // BTN 100K THROWS
             nLanci = 100000;
             if(cbxAnimation.isSelected()){
                 buildResults(nLanci, 1);
@@ -227,7 +227,7 @@ public class FrameInterface implements ActionListener{
                 frame.add(textPrintArea);
                 printPercentageLabels(lawTest.getPercentuali());
             }
-        } else if (e.getSource() == btn1000klanci){  // BTN 1000K THROWS
+        } else if (e.getSource() == btn1000klanci){     // BTN 1000K THROWS
             nLanci = 1000000;
             if(cbxAnimation.isSelected()){
                 buildResults(nLanci, 1);
@@ -237,7 +237,7 @@ public class FrameInterface implements ActionListener{
                 frame.add(textPrintArea);
                 printPercentageLabels(lawTest.getPercentuali());
             }
-        }else if (e.getSource() == btnShowCredits) { // BTN SHOW CREDITS
+        }else if (e.getSource() == btnShowCredits) {     // BTN SHOW CREDITS
             frame.remove(textPrintArea);
             removePercentageLabels();
             // popup with credits
@@ -248,6 +248,29 @@ public class FrameInterface implements ActionListener{
                 // popup con informazione
                 String errorMessage = "\"Attenzione\"\n" + "Per favore, non interrompere la costruzione del grafico cliccando un altro bottone";
                 JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Dialog", JOptionPane.INFORMATION_MESSAGE);
+
+                // print time indication labels
+                lblsTime[0].setText("circa 2s");
+                lblsTime[0].setBounds(frameMargin + 25, heightPresetsBtn + 40, 50, 30);
+                frame.add(lblsTime[0]);
+
+                lblsTime[1].setText("circa 2s");
+                lblsTime[1].setBounds(frameMargin * 2 + 25  + buttonWidth, heightPresetsBtn + 40, 50, 30);
+                frame.add(lblsTime[1]);
+
+                lblsTime[2].setText("circa 20s");
+                lblsTime[2].setBounds(frameMargin  * 3 + 25 + buttonWidth * 2, heightPresetsBtn + 40, 60, 30);
+                frame.add(lblsTime[2]);
+
+                lblsTime[3].setText("circa 3min30s");
+                lblsTime[3].setBounds(frameMargin * 4 + 8 + buttonWidth * 3, heightPresetsBtn + 40, 100, 30);
+                frame.add(lblsTime[3]);
+
+                lblsTime[4].setText("scoprilo tu stesso");
+                lblsTime[4].setBounds(frameMargin * 5 + buttonWidth * 4, heightPresetsBtn + 40, 150, 30);
+                frame.add(lblsTime[4]);
+
+                frame.repaint();
             }
         }else {      // BTN "submit" (custom value)
             if (!onlyNumbers(textFieldValue) || textFieldValue.isEmpty()) {    // invalid value
