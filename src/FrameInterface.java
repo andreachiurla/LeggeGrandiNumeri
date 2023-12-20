@@ -20,6 +20,7 @@ public class FrameInterface implements ActionListener{
     JButton btn1000klanci = new JButton("1000k lanci");
     JButton btnShowCredits = new JButton("Credits");
     Label[] lblsPercentage = {new Label(), new Label(), new Label(), new Label(), new Label(), new Label()};
+    JCheckBox cbxAnimation = new JCheckBox("Rallenta costruzione grafico", false);
 
     public FrameInterface(){
         prepareStartingGUI();
@@ -63,6 +64,11 @@ public class FrameInterface implements ActionListener{
         btnStartLaw.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnStartLaw.addActionListener(this);    // Registering ActionListener to the button
         frame.add(btnStartLaw);
+
+        // checkbox animation
+        cbxAnimation.setBounds(350, frameMargin * 4, 250, 22);
+        cbxAnimation.addActionListener(this);
+        frame.add(cbxAnimation);
 
         int heightPresetsBtn = frameMargin * 8;
         // presets label
@@ -124,6 +130,11 @@ public class FrameInterface implements ActionListener{
         return lawTest.toString(nThrows);
     }
 
+    public String startTesting(int nThrows, int slow){
+        lawTest.lancia();
+        return lawTest.toString(nThrows);
+    }
+
     /**
      * Removes 6 labels (graphic)
      */
@@ -163,6 +174,7 @@ public class FrameInterface implements ActionListener{
         return  (newMax-newMin)*(value-oldMin)/(oldMax-oldMin)+newMin;
     }
 
+
     // when one button is pressed:
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -176,42 +188,67 @@ public class FrameInterface implements ActionListener{
         int nLanci;
         if (e.getSource() == btn100lanci) {  // BTN 100 THROWS
             nLanci = 100;
-            String toPrint = startTesting(nLanci);
-            textPrintArea.setText(toPrint);
-            frame.add(textPrintArea);
-            printPercentageLabels(lawTest.getPercentuali());
-        }else if (e.getSource() == btn1klanci){
+            if(cbxAnimation.isSelected()){
+                buildResults(nLanci, 12);
+            }else {
+                String toPrint = startTesting(nLanci);
+                textPrintArea.setText(toPrint);
+                frame.add(textPrintArea);
+                printPercentageLabels(lawTest.getPercentuali());
+            }
+        }else if (e.getSource() == btn1klanci){ // BTN 1K THROWS
             nLanci = 1000;
-            String toPrint = startTesting(nLanci);
-            textPrintArea.setText(toPrint);
-            frame.add(textPrintArea);
-            printPercentageLabels(lawTest.getPercentuali());
+            if(cbxAnimation.isSelected()){
+                buildResults(nLanci, 1);
+            }else {
+                String toPrint = startTesting(nLanci);
+                textPrintArea.setText(toPrint);
+                frame.add(textPrintArea);
+                printPercentageLabels(lawTest.getPercentuali());
+            }
         } else if (e.getSource() == btn10klanci){   // BTN 10K THROWS
             nLanci = 10000;
-            String toPrint = startTesting(nLanci);
-            textPrintArea.setText(toPrint);
-            frame.add(textPrintArea);
-            printPercentageLabels(lawTest.getPercentuali());
+            if(cbxAnimation.isSelected()){
+                buildResults(nLanci, 1);
+            }else {
+                String toPrint = startTesting(nLanci);
+                textPrintArea.setText(toPrint);
+                frame.add(textPrintArea);
+                printPercentageLabels(lawTest.getPercentuali());
+            }
         } else if (e.getSource() == btn100klanci){  // BTN 100K THROWS
             nLanci = 100000;
-            String toPrint = startTesting(nLanci);
-            textPrintArea.setText(toPrint);
-            frame.add(textPrintArea);
-            printPercentageLabels(lawTest.getPercentuali());
+            if(cbxAnimation.isSelected()){
+                buildResults(nLanci, 1);
+            }else {
+                String toPrint = startTesting(nLanci);
+                textPrintArea.setText(toPrint);
+                frame.add(textPrintArea);
+                printPercentageLabels(lawTest.getPercentuali());
+            }
         } else if (e.getSource() == btn1000klanci){  // BTN 1000K THROWS
             nLanci = 1000000;
-            String toPrint = startTesting(nLanci);
-            textPrintArea.setText(toPrint);
-            frame.add(textPrintArea);
-            printPercentageLabels(lawTest.getPercentuali());
-        }else if (e.getSource() == btnShowCredits){ // BTN SHOW CREDITS
+            if(cbxAnimation.isSelected()){
+                buildResults(nLanci, 1);
+            }else {
+                String toPrint = startTesting(nLanci);
+                textPrintArea.setText(toPrint);
+                frame.add(textPrintArea);
+                printPercentageLabels(lawTest.getPercentuali());
+            }
+        }else if (e.getSource() == btnShowCredits) { // BTN SHOW CREDITS
             frame.remove(textPrintArea);
             removePercentageLabels();
             // popup with credits
             String errorMessage = "\"Crediti\"\n" + "Progetto di Andrea Chiurla con l'aiuto del prof. Luigi Ferrari";
             JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Credits", JOptionPane.INFORMATION_MESSAGE);
-
-        } else{      // BTN "submit" (custom value)
+        }else if (e.getSource() == cbxAnimation) {
+            if (cbxAnimation.isSelected()) {
+                // popup con informazione
+                String errorMessage = "\"Attenzione\"\n" + "Per favore, non interrompere la costruzione del grafico cliccando un altro bottone";
+                JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Dialog", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else {      // BTN "submit" (custom value)
             if (!onlyNumbers(textFieldValue) || textFieldValue.isEmpty()) {    // invalid value
                 System.out.println("--- INVALID VALUE ---");
                 frame.remove(textPrintArea);
@@ -219,7 +256,7 @@ public class FrameInterface implements ActionListener{
                 btnShowCredits.setBounds(frameWidth - frameMargin - 90, frameHeight - frameMargin - 50, 90, 30);
                 // popup con errore
                 String errorMessage = "\"Errore\"\n" + "Valore non valido";
-                    JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Dialog", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Dialog", JOptionPane.ERROR_MESSAGE);
             }else{      // valid value
                 System.out.println("--- VALID VALUE ---");
                 nLanci = Integer.parseInt(textFieldValue.trim());
@@ -229,6 +266,29 @@ public class FrameInterface implements ActionListener{
                 printPercentageLabels(lawTest.getPercentuali());
             }
         }
+    }
+
+    private void buildResults(int nLanci, int millisDelay) {
+        // background working: https://stackoverflow.com/a/19708722
+        SwingWorker<String, Object> worker = new SwingWorker<>() {
+            @Override
+            protected String doInBackground() {
+                lawTest.reset();
+                frame.add(textPrintArea);
+                for (int i = 0; i < nLanci; i++) {
+                    String toPrint = startTesting(nLanci, 0);
+                    printPercentageLabels(lawTest.getPercentuali(i));
+                    textPrintArea.setText(toPrint);
+                    try {
+                        Thread.sleep(millisDelay);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+                return "DONE";
+            }
+        };
+        worker.execute();
     }
 
     /**

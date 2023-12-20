@@ -29,7 +29,7 @@ public class LawTest {
         iterazioni = inIterazioni;
         // creating string to print
         String string = "Usciti:\n*1*: ";
-        for(int i = 0; i < numbersDrew.length; i++){
+        for(int i = 1; i < numbersDrew.length; i++){
             string += numbersDrew[i];
             if(i < numbersDrew.length - 1) string += "\n" + "*" + (i + 1) + "* ";
         }
@@ -39,6 +39,12 @@ public class LawTest {
     public double[] getPercentuali(){
         for(int i = 0; i < numbersDrew.length; i++){
             percentuali[i] = roundAvoid((double)numbersDrew[i] / (double)getIterazioni() * 100, 2);  // calcolo percentuale
+        }
+        return percentuali;
+    }
+    public double[] getPercentuali(int iterationsDone){
+        for(int i = 0; i < numbersDrew.length; i++){
+            percentuali[i] = roundAvoid((double)numbersDrew[i] / (double)iterationsDone * 100, 2);  // calcolo percentuale
         }
         return percentuali;
     }
