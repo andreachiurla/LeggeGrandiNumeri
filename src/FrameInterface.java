@@ -34,7 +34,8 @@ public class FrameInterface implements ActionListener{
         frame.getContentPane().setLayout(null);
         frame.setSize(frameWidth, frameHeight);
         frame.setLocationRelativeTo(null);      // open frame in center of the screen
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // stop esecution when frame is closed
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // stop execution when frame is closed
+        frame.setResizable(false);
         frame.setVisible(false);    // nascondi finestra
     }
 
